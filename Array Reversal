@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int num, *arr, i,aux,inicio=0,final;
+    do{
+        scanf("%d", &num);
+    }while(num<1 | num>1000);
+    arr = (int*) malloc(num * sizeof(int));
+    for(i = 0; i < num; i++) {
+        scanf("%d", arr + i);
+    }
+    final=num-1;
+    while(inicio<final){
+        aux=arr[inicio];
+        arr[inicio]=arr[final];
+        arr[final]=aux;
+        inicio++;
+        final--;
+    }
+
+    for(i = 0; i < num; i++){
+     printf("%d ",*(arr + i));
+    }
+    return 0;
+}
