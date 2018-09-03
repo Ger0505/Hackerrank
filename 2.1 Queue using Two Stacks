@@ -1,0 +1,82 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define Nodo struct nodo
+Nodo{
+    int dato;
+    Nodo*siguiente;
+};
+    Nodo*inicio=NULL;
+    Nodo*final=NULL;
+
+void insertar(int dato);
+void eliminar();
+void imprimir();
+void visualizarVista();
+Nodo*nuevoElemento();
+
+int main(){
+    int q,type,x;
+    do{
+        scanf("%i",&q);
+    }while(q<1 | q>100000);
+    while(q!=0){
+        do{
+            scanf("%i",&type);
+        }while(type<1 | type>3);
+        switch(type){
+            case 1:
+                scanf("%i",&x);
+                insertar(x);
+                q--;
+                break;
+            case 2:
+                eliminar();
+                q--;
+                break;
+            case 3:
+                imprimir();
+                q--;
+                break;
+        }
+    }
+}
+void insertar(int dato){
+    Nodo*nuevo=nuevoElemento();
+    nuevo->dato=dato;
+    nuevo->siguiente=NULL;
+    if(inicio==NULL){
+        inicio=nuevo;
+        final=nuevo;
+    }else{
+        nuevo->siguiente=inicio;
+        inicio=nuevo;
+    }
+}
+Nodo*nuevoElemento(){
+    Nodo*q=(Nodo*)malloc(sizeof(Nodo));
+    return q;
+}
+void eliminar(){
+    if(inicio!=NULL && final!=NULL){
+        if(inicio!=final){
+            Nodo*aux=inicio;
+            while(aux->siguiente!=final){
+                aux=aux->siguiente;
+            }
+            final=aux;
+        }else{
+            inicio=NULL;
+            final=NULL;
+        }
+    }
+}
+
+void imprimir(){
+    if(inicio!=NULL && final!=NULL){
+    if(inicio!=final){
+        printf("%i\n",final->dato);
+    }else{
+        printf("%i\n",inicio->dato);
+    }
+    }
+}
